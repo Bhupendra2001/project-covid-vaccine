@@ -44,8 +44,10 @@ const vaccineSlots = new mongoose.Schema({
         "03:00PM-03:30PM": { type: String, enum: ["Available", "Unavailable"] },
         "03:30PM-04:00PM": { type: String, enum: ["Available", "Unavailable"] },
         "04:00PM-04:30PM": { type: String, enum: ["Available", "Unavailable"] },
-        "04:30PM-05:00PM": { type: String, enum: ["Available", "Unavailable"] }
-    }]
+        "04:30PM-05:00PM": { type: String, enum: ["Available", "Unavailable"] },
+    _id:0
+    }],
+    
 })
 
 module.exports = mongoose.model('vaccineSlots', vaccineSlots)

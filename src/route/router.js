@@ -5,7 +5,7 @@ const vC=require("../controller/vaccineController")
 
 router.post('/register', Register  )
 router.post('/login',  login )
-router.get("/vaccineAvailable",vC.vaccineAvailable)
+router.post("/vaccineAvailable",vC.vaccineAvailable)
 router.post("/createVaccineSlot",vC.createVaccineSlot)
 
 module.exports = router

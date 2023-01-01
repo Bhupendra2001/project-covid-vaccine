@@ -1,7 +1,7 @@
 const userModel = require('../models/userModel')
 const jwt = require('jsonwebtoken')
 const bcrypt = require("bcrypt")
-const {isValidDate,isValidPhone,isValidPassword,isValidName,isValid,isValidAadhar,isValidNumber,isValidPincode}=require("../validator/validator")
+const {isValidPhone,isValidPassword,isValidName,isValid,isValidAadhar,isValidNumber,isValidPincode}=require("../validator/validator")
 
 
 //====================================================resisterUser=======================================
