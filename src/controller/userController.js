@@ -1,7 +1,7 @@
 const userModel = require('../models/userModel')
 const jwt = require('jsonwebtoken')
 const bcrypt = require("bcrypt")
-
+const {isValidDate,isValidPhone,isValidPassword,isValidName,isValid,isValidAadhar,isValidNumber,isValidPincode}=require("../validator/validator")
 
 
 //====================================================resisterUser=======================================
@@ -19,7 +19,8 @@ const Register = async (req, res) => {
         if (!Password) return res.status(400).send({ status: false, message: "please provide password" })
         if (!isValid(Password)) return res.status(400).send({ status: false, message: "please provide valid password" })
         if (!isValidPassword(Password)) return res.status(400).send({ status: false, message: "please provide password " })
-        Password = await bcrypt.hashSync(Password, 10)
+        
+        data.Password = await bcrypt.hash(Password,10)
 
         if (!Name) return res.status(400).send({ status: false, message: "please provide name" })
         if (!isValid(Name)) return res.status(400).send({ status: false, message: "please provide valid name..." })
@@ -55,19 +56,19 @@ const login = async (req, res) => {
         let data = req.body
         if (Object.keys(data).length == 0) return res.status(400).send({ status: false, message: "please provide data" })
 
-        let { PhoneNumber, password } = data
+        let { PhoneNumber, Password } = data
         if (!PhoneNumber) return res.status(400).send({ status: false, message: "please provide  PhoneNumber " })
-        if (!password) return res.status(400).send({ status: false, message: "please provide  password " })
+        if (!Password) return res.status(400).send({ status: false, message: "please provide  password " })
 
         if (!isValidPhone(PhoneNumber)) return res.status(400).send({ status: false, message: "please provide  valid PhoneNumber " })
-        if (!isValidPassword(password)) return res.status(400).send({ status: false, message: "please provide  valid  password " })
+        if (!isValidPassword(Password)) return res.status(400).send({ status: false, message: "please provide  valid  password " })
 
         let user = await userModel.findOne({ PhoneNumber: PhoneNumber, })
         if (!user) return res.status(404).send({ status: false, message: "user is not present" })
-        password = await bcrypt.compare(password, user.password)
-        if (!password) return res.status(400).send({ status: false, msg: "password is not matching" })
-        
-        const token = jwt.sign({ PhoneNumber: user.PhoneNumber, password: user.password }, "Covid-project", { expiresIn: "24h" })
+           Password = await bcrypt.compare(Password, user.Password)
+        if (!Password) return res.status(400).send({ status: false, msg: "password is not matching" })
+
+        const token = jwt.sign({ PhoneNumber: user.PhoneNumber, Password: user.Password }, "Covid-project", { expiresIn: "24h" })
 
         return res.status(200).send({ status: true, msg: "user login successfully", token: token })
 
