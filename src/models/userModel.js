@@ -10,6 +10,9 @@ let userSchema = new mongoose.Schema({
         required: true,
         unique:true
     },
+    isAdmin:{
+        type:Boolean,
+    },
     Age: {
         type:Number,
         require:true
