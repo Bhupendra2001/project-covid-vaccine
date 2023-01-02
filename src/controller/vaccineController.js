@@ -1,34 +1,16 @@
 const vaccineModel = require("../models/vaccineModel")
-const bcrypt = require("bcrypt")
 const userModel = require('../models/userModel')
-<<<<<<< HEAD
-const { isValidDate, isValidPhone, isValidPassword, isValidName, isValid, isValidAadhar, isValidNumber, isValidPincode } = require("../validator/validator")
+const {  isValid} = require("../validator/validator")
 
-=======
-const {isValidDate,isValidPhone,isValidPassword,isValidName,isValid,isValidAadhar,isValidNumber,isValidPincode} = require('../validator/validator')
->>>>>>> 1d686f74628c114b0bb21fb9d183874027c186a1
 
 const createVaccineSlot = async (req, res) => {
     try {
         let data = req.body
-<<<<<<< HEAD
         let { PhoneNumber, Password, Date, Dose, timeSlots } = data
-=======
-        let { PhoneNumber, password, Date, Dose, timeSlots} = data
->>>>>>> 1d686f74628c114b0bb21fb9d183874027c186a1
 
         if (Object.keys(data).length == 0) return res.status(400).send({ status: false, msg: "body is not present" })
 
         if (!Date) return res.status(400).send({ status: false, msg: "date is not present" })
-<<<<<<< HEAD
-        if (!isValidDate(Date)) return res.status(400).send({ status: false, message: "Date should be in YYYY-MM-DD format" })
-=======
-        if (!validator.isValidDate(Date)) return res.status(400).send({ status: false, message: "Date should be in YYYY-MM-DD format" })
->>>>>>> 1d686f74628c114b0bb21fb9d183874027c186a1
-
-        if (!PhoneNumber) return res.status(400).send({ status: false, message: "please provide  phonenumber " })
-        if (!isValidPhone(PhoneNumber)) return res.status(400).send({ status: false, message: "please provide phonenumber" })
-
         if (!Password) return res.status(400).send({ status: false, message: "please provide password" })
         if (!isValid(Password)) return res.status(400).send({ status: false, message: "please provide valid password" })
 
